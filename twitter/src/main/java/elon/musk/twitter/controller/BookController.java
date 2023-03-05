@@ -32,18 +32,30 @@ public class BookController {
 
 	@GetMapping("/findAllBooks")
 	public List<Book> getBooks() {
-		log.info("######################################");
 		log.info( "Here we Go "+repository.findAll());
 		return repository.findAll();
 	}
 
-	@GetMapping("/findAllBooks/{bookId}")
-	public Optional<Book> getBook(@PathVariable int bookId) {
-		log.info("######################################");
-		log.info("id :" +bookId);
-		log.info(""+repository.findById(bookId));
-		return repository.findById(bookId);
+	@GetMapping("/findAllBooks/{id}")
+	public Optional<Book> getBook(@PathVariable("id") int id) {
+		repository.getBookByBookId(id);
+		//getBookByBookId
+		log.info("getBookByBookId : "+ repository.getBookByBookId(id));
+		log.info("id :" +id);
+		log.info("FindBYId"+repository.findById(id));
+		return repository.getBookByBookId(id);
 	}
+
+	@GetMapping("/findAllBooks/{id}")
+	public Optional<Book> getBooksByAuthor(@PathVariable("id") int id) {
+		repository.getBookByBookId(id);
+		//getBookByBookId
+		log.info("getBookByBookId : "+ repository.getBookByBookId(id));
+		log.info("id :" +id);
+		log.info("FindBYId"+repository.findById(id));
+		return repository.getBookByBookId(id);
+	}
+
 
 	@DeleteMapping("/delete/{bookId}")
 	public String deleteBook(@PathVariable int bookId) {
